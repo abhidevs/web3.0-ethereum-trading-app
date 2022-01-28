@@ -59,7 +59,7 @@ export const TransactionProvider = ({ children }) => {
       );
 
       setTransactions(structuredTransactions);
-      console.log(structuredTransactions);
+      // console.log(structuredTransactions);
     } catch (err) {
       console.log(err);
     }
@@ -67,7 +67,8 @@ export const TransactionProvider = ({ children }) => {
 
   const checkIfWalletIsConnected = async () => {
     try {
-      if (!ethereum) return alert("Please install Metamask");
+      // if (!ethereum) return alert("Please install Metamask");
+      if (!ethereum) return;
 
       const accounts = await ethereum.request({ method: "eth_accounts" });
       if (accounts.length) {
@@ -84,6 +85,8 @@ export const TransactionProvider = ({ children }) => {
   };
 
   const checkIfTransactionsExist = async () => {
+    if (!ethereum) return;
+    
     try {
       const transactionContract = getEthereumContract();
       const transactionCnt = await transactionContract.getTransactionCount();
