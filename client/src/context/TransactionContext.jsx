@@ -54,6 +54,7 @@ export const TransactionProvider = ({ children }) => {
           message: transaction.message,
           keyword: transaction.keyword,
           amount: parseInt(transaction.amount._hex) / 10 ** 18,
+          key: transaction.timestamp.toNumber(),
         })
       );
 
@@ -102,6 +103,7 @@ export const TransactionProvider = ({ children }) => {
         method: "eth_requestAccounts",
       });
       setCurrentAccount(accounts[0]);
+      getAllTransactions();
     } catch (err) {
       console.log(err);
       throw new Error("No ethereum object.");
